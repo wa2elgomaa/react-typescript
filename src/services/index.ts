@@ -1,20 +1,32 @@
-import axios from "axios";
+import axios , {AxiosRequestConfig , AxiosResponse} from "axios";
 import {ServerResponse} from '../types';
 
-const headers = {
-    'Content-Type': 'application/json'
+let options : AxiosRequestConfig = {
+  headers: {
+    'Content-Type': 'application/json',
+  }
 };
 
 export async function fetchData(
   url : string, 
   payload : JSON
 ) : Promise<ServerResponse> {
-  let results ;
   try {
-    results = await axios.post(url , payload);
+    let response : AxiosResponse<ServerResponse> = await axios.post(url , payload , options);
+    if(response.status == 200){
+      // we could send all the object as the entity in BE same as FE, but we should filter the data we need to send back
+      if(response.data){
+        return {
+          status : response.data.status,
+          statusText : response.data.statusText,
+          results : response.data.results
+        }
+      }
+    }
+    // return any response status if it's not 200 
     return {
-      status : 200,
-      results : results
+      status : response.status,
+      statusText : response.statusText
     }
   }catch(err){
     return {

@@ -9,7 +9,6 @@ export const ListItemWrapper = styled.div`{
     margin: 2px;
     flex-grow: 1;
     width: 32%;
-    height: 100px;
     @media only screen and (max-width: 768px) {
       width: 48%;
     }

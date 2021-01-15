@@ -29,7 +29,7 @@ export function ListItem(props : ListItemProps) {
           <ListItemDetails>
             <div>
               <label>Title : </label>
-              <h2>{item.displayName}</h2>
+              <h4>{item.displayName}</h4>
             </div>
             {
             item.score ? <div><label>Score :</label> <div>
